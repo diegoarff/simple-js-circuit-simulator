@@ -15,11 +15,11 @@ compImg.src = './images/component.png'
 
 let resImg = new Image();
 resImg.onload = function () { }
-resImg.src = './images/res.png'
+resImg.src = './images/resistance.png'
 
 let vsImg = new Image();
 vsImg.onload = function () { }
-vsImg.src = './images/fuente.png'
+vsImg.src = './images/voltage.png'
 
 //Obtener botones de agregado y agregar su evento click
 
@@ -45,9 +45,36 @@ addVsBtn.addEventListener('click', () => {
     vs.draw(CTX);
 })
 
+document.addEventListener('keydown', (e) => {
+
+    COMPONENTS.forEach(comp => {
+        if (comp.dragging) {
+            switch (e.key) {
+                case 'Backspace':
+                    COMPONENTS.pop();
+                    break;
+                case 'P':
+                case 'p':
+                    //TODO --- Open dialog
+                    break;
+                default:
+                    break;
+            }
+        }
+    })
+
+    execute();
+});
+
 //--------------------------------------------------------
 
 let COMPONENTS = [];
+
+//Limpia el canvas y dibuja todos los componentes
+function execute() {
+    CTX.clearRect(0, 0, CANVAS.width, CANVAS.height);
+    COMPONENTS.forEach(comp => comp.draw(CTX));
+}
 
 //Configuración de canvas
 
@@ -58,18 +85,11 @@ CANVAS.width = window.innerWidth - 2;
 CANVAS.height = window.innerHeight * 0.8;
 CANVAS.style.border = '1px solid black'
 
-
-function drawComponents() {
-    COMPONENTS.forEach(comp => comp.draw(CTX));
-}
-
 CANVAS.addEventListener('click', (e) => {
     e.stopPropagation();
 
     var mouseX = parseInt(e.clientX - e.target.offsetLeft);
     var mouseY = parseInt(e.clientY - e.target.offsetTop);
-
-    CTX.clearRect(0, 0, CANVAS.width, CANVAS.height);
 
     let found = false;
 
@@ -102,7 +122,7 @@ CANVAS.addEventListener('click', (e) => {
         }
     }
 
-    drawComponents()
+    execute();
 });
 
 CANVAS.addEventListener('mousemove', (e) => {
@@ -110,8 +130,6 @@ CANVAS.addEventListener('mousemove', (e) => {
 
     var mouseX = parseInt(e.clientX - e.target.offsetLeft);
     var mouseY = parseInt(e.clientY - e.target.offsetTop);
-
-    CTX.clearRect(0, 0, CANVAS.width, CANVAS.height);
 
     for (let i = 0; i < COMPONENTS.length; i++) {
 
@@ -124,7 +142,7 @@ CANVAS.addEventListener('mousemove', (e) => {
         }
     }
 
-    drawComponents()
+    execute();
 });
 
 
