@@ -2,14 +2,99 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 header {
-    background-color: gray;
-    padding: 2rem;
+    background-color: rgb(92, 116, 184);
+    padding: 1.5rem;
 }
 
-header > button {
-    padding: 1rem 2rem;
+button {
+    padding: 0.7rem;
     cursor: pointer;
+    border-radius: 16px;
+    border: 1px solid black;
+    margin-right: 1rem;
+} 
+
+button:hover {
+    box-shadow: 2px 3px black;
+}
+
+
+button > img {
+    width: 4rem;
+    height: 4rem;
+    object-fit: cover;
+}
+
+.dialog {
+    background-color: rgb(162, 176, 216);
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+    padding: 2rem 3rem;
+    border-radius: 16px;
+    border: 1px solid black;
+    box-shadow: 3px 4px black;
+
+}
+
+.items-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.title-modal {
+    margin-bottom: 5px;
+}
+
+.data label {
+    display: block;
+    margin-bottom: 4px;
+}
+
+.inputs-modal {
+    color: rgb(49, 74, 143);
+    margin-bottom: 4px;
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+
+.inputs-modal:disabled {
+    color: black;
+}
+
+.button-close {
+    width: 100px;
+    margin: 1rem auto 0 auto;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.button-close:hover {
+    box-shadow: 1px 2px black;
+}
+
+#myCanvas, #grid{
+    position: absolute;
+    top: 139px;
+}
+
+#solve {
+    background-color: rgb(243, 70, 70);
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 1rem 2rem;
+    margin-right: 5rem;
+    position: absolute;
+    right: 0;
+    top: 44px;
 }

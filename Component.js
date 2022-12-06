@@ -9,6 +9,7 @@ export default class Component {
         this.dragging = false;
         this.offsetX;
         this.offsetY;
+
     }
 
     draw(ctx) {

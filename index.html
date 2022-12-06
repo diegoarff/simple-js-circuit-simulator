@@ -10,10 +10,28 @@
 	<body>
 		<header>
 			<button id="add-comp">Add Component</button>
-			<button id="add-res">Add Resistance</button>
-			<button id="add-vs">Add Voltage Source</button>
+			<button id="add-vs">
+				<img src="./images/voltage.png" alt="" />
+			</button>
+			<button id="add-res">
+				<img src="./images/resistance.png" alt="" />
+			</button>
+			<button id="add-res-v">
+				<img src="./images/resistance-v.png" alt="" />
+			</button>
+			<button id="add-wire">
+				<img src="./images/wire.png" alt="" />
+			</button>
+			<button id="add-wire-v">
+				<img src="./images/wire-v.png" alt="" />
+			</button>
+			<button id="solve">Solve Circuit</button>
 		</header>
-		<canvas id="myCanvas"></canvas>
+		<div>
+			<canvas id="grid"></canvas>
+			<canvas id="myCanvas"></canvas>
+		</div>
+
 		<script type="module" src="main.js"></script>
 	</body>
 </html>
