@@ -15,6 +15,7 @@ header > button {
 }
 
 
+
 #title{
     color:#FFF;
     font-size: 28px;
@@ -62,4 +63,11 @@ dialog{
 
 .hidden{
     display:none;
+}
+
+
+
+#myCanvas, #grid{
+    position: absolute;
+    top:115px;
 }

@@ -102,10 +102,11 @@ CANVAS.addEventListener('click', (e) => {
 
         if (!found) {
 
-            //Si el componente ya había sido clickeado, 
-            //se le quita su propiedad dragging para que deje de moverse
             if (comp.dragging) {
+                comp.x=Math.round(comp.x/50)*50;
+                comp.y=Math.round(comp.y/50)*50;
                 comp.dragging = false;
+
                 continue;
             }
 
@@ -139,13 +140,60 @@ CANVAS.addEventListener('mousemove', (e) => {
         let comp = COMPONENTS[i];
 
         if (comp.dragging) {
+        
+                comp.x = mouseX - comp.offsetX;
+                comp.y = mouseY - comp.offsetY;
+                continue;
+                
             
-            comp.x = mouseX - comp.offsetX;
-            comp.y = mouseY - comp.offsetY;
-            continue;
         }
     }
 
     execute();
+    
 });
 
+function createGrid(){
+    let gridCanvas = document.getElementById("grid")
+    let gridContext = gridCanvas.getContext('2d');
+    gridCanvas.width = window.innerWidth - 2;
+    gridCanvas.height = window.innerHeight * 0.8;
+    
+
+    gridContext.beginPath();
+    gridContext.strokeStyle="gray"
+    for(let i=0;i<gridCanvas.width;i+=50){
+        gridContext.moveTo(i,0);
+        gridContext.lineTo(i,gridCanvas.height)
+        
+    }
+
+    for(let i=0;i<gridCanvas.height;i+=50){
+        gridContext.moveTo(0,i)
+        gridContext.lineTo(gridCanvas.width, i)
+    }
+
+    gridContext.stroke()
+}
+
+//p1 va a ser el del dragging
+//p2 se va a iterar sobre el arreglo COMPONENTS
+
+/*
+this.n1={x:0,y:this.height/2}
+this.n2={x:this.width,y:this.height/2}
+function distance(p1,p2){
+    
+    return Math.sqrt((p1.x-p2.x)*(p1.x-p2.x)+(p1.y-p2.y)*(p1.y-p2.y) )
+}
+
+function verifyLink(comp){
+    
+    for(let i=0;i<COMPONENTS.length;i++){
+        
+        if(distance(comp.)){}
+    }
+}
+*/
+
+document.addEventListener('DOMContentLoaded', createGrid)

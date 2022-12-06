@@ -9,6 +9,8 @@ export default class Component {
         this.dragging = false;
         this.offsetX;
         this.offsetY;
+        this.n1={x:0,y:this.height/2}
+        this.n2={x:this.width,y:this.height/2}
     }
 
     draw(ctx) {
@@ -16,8 +18,8 @@ export default class Component {
             ctx.strokeStyle = 'red';
             ctx.strokeRect(this.x, this.y, this.width, this.height);
         }
-
-        ctx.drawImage(this.image, this.x, this.y);
+        
+        ctx.drawImage(this.image, this.x, this.y, 50,50);
     }
 
 }
