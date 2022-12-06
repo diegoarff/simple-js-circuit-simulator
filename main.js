@@ -83,6 +83,7 @@ CANVAS.addEventListener('mousemove', (e) => {
 
         if (comp.dragging) {
 
+
             comp.x = mouseX - comp.offsetX;
             comp.y = mouseY - comp.offsetY;
             continue;
