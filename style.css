@@ -13,3 +13,53 @@ header > button {
     padding: 1rem 2rem;
     cursor: pointer;
 }
+
+
+#title{
+    color:#FFF;
+    font-size: 28px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+
+.centrado{
+    background-color: gray;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+    overflow: hidden;
+    
+}
+
+.items-center{
+
+flex-direction: column;
+display: flex;
+justify-content: center;
+align-items: center;
+text-align: center;
+margin: 20px;
+
+}
+
+dialog{
+    border: 5px solid black;
+    border-radius: 15px;
+    background: repeating-linear-gradient(30deg, var(--secondary), white);
+    
+}
+
+.inputs-modal{
+    color:blue;
+}
+
+.block{
+    pointer-events: none;
+}
+
+.hidden{
+    display:none;
+}

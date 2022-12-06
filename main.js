@@ -7,6 +7,7 @@ import Component from './Component.js' //debería ser removido cuando tengamos l
 import Resistance from './Resistance.js'
 import VoltageSource from './VoltageSource.js'
 
+
 //Cargar imágenes
 
 let compImg = new Image();
@@ -50,11 +51,13 @@ document.addEventListener('keydown', (e) => {
     COMPONENTS.forEach(comp => {
         if (comp.dragging) {
             switch (e.key) {
-                case 'Backspace':
+                case 'd':
+                case 'D':
                     COMPONENTS.pop();
                     break;
                 case 'P':
                 case 'p':
+                    comp.openModal()
                     //TODO --- Open dialog
                     break;
                 default:
@@ -136,6 +139,7 @@ CANVAS.addEventListener('mousemove', (e) => {
         let comp = COMPONENTS[i];
 
         if (comp.dragging) {
+            
             comp.x = mouseX - comp.offsetX;
             comp.y = mouseY - comp.offsetY;
             continue;
@@ -144,5 +148,4 @@ CANVAS.addEventListener('mousemove', (e) => {
 
     execute();
 });
-
 
