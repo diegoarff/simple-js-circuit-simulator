@@ -4,6 +4,9 @@ export default class Wire extends Component {
 
     constructor(x, y, img, rotate) {
         super(x, y, img);
+        this.rotate = rotate;
+        this.n1;
+        this.n2;
     }
 
     changeNodes() {
@@ -11,8 +14,8 @@ export default class Wire extends Component {
             this.n1 = { x: this.x + this.width / 2, y: this.y }
             this.n2 = { x: this.x + this.width / 2, y: this.y + this.height }
         } else {
-            this.n1 = { x: this.x, y: this.y + this.height / 2 }
-            this.n2 = { x: this.x + this.width, y: this.y + this.height / 2 }
+            this.n1 = { x: this.x + this.width, y: this.y + this.height / 2 }
+            this.n2 = { x: this.x, y: this.y + this.height / 2 }
         }
     }
 

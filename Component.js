@@ -20,5 +20,4 @@ export default class Component {
 
         ctx.drawImage(this.image, this.x, this.y);
     }
-
 }

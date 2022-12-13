@@ -12,14 +12,6 @@ let GRID_SIZE = 25;
 let CANVAS_HEIGHT = window.innerHeight * 0.8 + 43;
 let CANVAS_WIDTH = window.innerWidth - 2;
 
-//Limpia el canvas y dibuja todos los componentes
-function execute() {
-    CTX.clearRect(0, 0, CANVAS.width, CANVAS.height);
-    COMPONENTS.forEach(comp => {
-        comp.update(CTX);
-    });
-}
-
 //Configuración de canvas
 
 let CANVAS = document.getElementById('myCanvas');
@@ -67,8 +59,6 @@ CANVAS.addEventListener('click', (e) => {
             }
         }
     }
-
-    execute();
 });
 
 CANVAS.addEventListener('mousemove', (e) => {
@@ -83,17 +73,11 @@ CANVAS.addEventListener('mousemove', (e) => {
 
         if (comp.dragging) {
 
-
             comp.x = mouseX - comp.offsetX;
             comp.y = mouseY - comp.offsetY;
             continue;
-
-
         }
     }
-
-    execute();
-
 });
 
 document.addEventListener('keydown', (e) => {
@@ -111,7 +95,6 @@ document.addEventListener('keydown', (e) => {
                     comp.y = Math.round(comp.y / GRID_SIZE) * GRID_SIZE;
                     comp.dragging = false;
                     comp.openModal()
-                    //TODO --- Open dialog
                     break;
                 case 'c':
                     console.log(COMPONENTS);
@@ -121,9 +104,75 @@ document.addEventListener('keydown', (e) => {
             }
         }
     })
-
-    execute();
 });
+
+let solveBtn = document.getElementById('solve');
+
+solveBtn.addEventListener('click', () => {
+    let adjacencyList = new Map();
+
+    COMPONENTS.forEach(comp => {
+        adjacencyList.set(comp, getAdjacents(comp, COMPONENTS));
+    });
+
+    let totalResistance = solveCircuit(adjacencyList, getVoltageSource(COMPONENTS));
+    
+    console.log('Total resistance', totalResistance);
+});
+
+function getVoltageSource(components) {
+    let voltageSource = null;
+
+    components.forEach(comp => {
+        if (comp instanceof VoltageSource) {
+            voltageSource = comp;
+        }
+    });
+
+    return voltageSource;
+}
+
+function getAdjacents(comp, components) {
+
+    let adjacents = [];
+
+    components.forEach(component => {
+        if (comp.n2.x == component.n1.x && comp.n2.y == component.n1.y) {
+            adjacents.push(component);
+        }
+    })
+
+    return adjacents;
+}
+
+function solveCircuit(adjacencyList, voltageSource) {
+    
+    let visited = new Set();
+    let stack = [source];
+    let totalResistance = 0;
+
+    while (stack.length > 0) {
+        let current = stack.pop();
+
+        if (visited.has(current)) {
+            continue;
+        }
+
+        visited.add(current);
+
+        if (current instanceof Resistance) {
+            totalResistance += current.value;
+        }
+
+        let adjacents = graph.get(current);
+
+        adjacents.forEach(adj => {
+            stack.push(adj);
+        });
+    }
+
+    return totalResistance;
+}
 
 //-----------------------------------------------------------------
 
@@ -132,7 +181,6 @@ function createGrid() {
     let gridContext = gridCanvas.getContext('2d');
     gridCanvas.width = CANVAS_WIDTH;
     gridCanvas.height = CANVAS_HEIGHT;
-
 
     gridContext.beginPath();
     gridContext.lineWidth = 0.5;
@@ -225,3 +273,14 @@ addWireVerBtn.addEventListener('click', () => {
     COMPONENTS.push(wire);
     wire.update(CTX);
 });
+
+//Limpia el canvas y dibuja todos los componentes
+function animate() {
+    CTX.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+    COMPONENTS.forEach(comp => {
+        comp.update(CTX);
+    })
+    window.requestAnimationFrame(animate);
+}
+
+animate();

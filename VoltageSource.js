@@ -30,8 +30,8 @@ export default class VoltageSource extends Component {
     }
 
     changeNodes() {
-        this.n1 = { x: this.x + this.width / 2, y: this.y }
-        this.n2 = { x: this.x + this.width / 2, y: this.y + this.height }
+        this.n1 = { x: this.x + this.width / 2, y: this.y + this.height }
+        this.n2 = { x: this.x + this.width / 2, y: this.y }
     }
 
     update(ctx) {
